@@ -8,4 +8,10 @@ main section {
   border: 1px solid blue;
 }
 
+.card-add {
+  height: 23rem;
+}
 
+.card-deck, .card-active {
+  height: 40rem;
+}
