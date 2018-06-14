@@ -12,6 +12,9 @@ header h1 {
 header img {
   max-width: 100px;
   float: left;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 main section {
