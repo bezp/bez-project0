@@ -5,16 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="style/index.css">
 
-  <title>Flash dez Cardz</title>
+  <title>Flash deez Cardz</title>
 </head>
 <body class="container-fluid text-center">
   <header class="">
     <img src="images/bp_logo6.png" alt="logo" title="BP logo">
     <h1>
-      Flash dez Cardz
+      Flash deez Cardz
     </h1>
     <!-- <button>New</button> -->
   </header>
@@ -31,17 +32,52 @@
         <button type="submit" class="btn btn-success">Add</button>  
         </section>
       </form>
+
     </section>
 
     <section class="card-deck col-sm-3">
-      <span>
-        aaaaaaaaaaa
+      <section class="row">
+          <h2 class="deck-text">Deck</h2>
+      </section>
+      <span class="card-deck-listed example-deck">
+        term1
+      </span>
+      <span class="card-deck-listed example-deck">
+        term2
+      </span>
+      <span class="card-deck-listed example-deck">
+        term3
+      </span>
+      <span class="card-deck-listed example-deck">
+        term4
+      </span>
+      <span class="card-deck-listed example-deck">
+        term5
+      </span>
+      <span class="card-deck-listed example-deck">
+        term6
       </span>
     </section>
     <section class="card-active col-sm-9">
-      <span>
-        bbbbbbbbbb
-      </span>
+      <section>
+        <button>Previous</button>
+        <button>Next</button>
+        <button>Edit</button>
+        <button>Update</button>
+        <button>Delete</button>
+        <a href="#"><i class="fa fa-twitter" style="font-size:36px"></i></a>
+      </section>
+      <section class="flip-container">
+        <span class="card-main-displayed example-main flipper">
+          <section class="card-main-front">
+            displayed term front
+          </section>
+          <section class="card-main-back">
+            displayed term back
+          </section>
+
+        </span>
+      </section>
     </section>
   </main>
 

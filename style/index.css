@@ -17,9 +17,9 @@ header img {
   left: 0;
 }
 
-main section {
+/* main section {
   border: 1px solid blue;
-}
+} */
 
 .card-add {
   height: 23rem;
@@ -27,4 +27,87 @@ main section {
 
 .card-deck, .card-active {
   height: 40rem;
+}
+
+
+
+
+
+.card-deck {
+  overflow-y: scroll;
+}
+
+.example-deck {
+  border: 1px red solid;
+  width: 200px;
+  display: block;
+  margin: 20px auto;
+  padding: 20px
+}
+
+.example-main {
+  border: 1px green solid;
+  width: 40%;
+  padding: 90px;
+  margin: 5% auto;
+  display: block;
+}
+
+::-webkit-scrollbar {
+  width: 0px;  /* remove scrollbar space */
+  /* background: transparent;  optional: just make scrollbar invisible */
+}
+
+.deck-text {
+  position: fixed;
+}
+
+
+
+
+
+/* flip css */
+/* entire container, keeps perspective */
+.flip-container {
+  perspective: 1000px;
+  /* border: 1px pink solid; */
+}
+	/* flip the pane when hovered */
+	.flip-container:active .flipper, .flip-container.hover .flipper {
+    transform: rotateY(180deg);
+
+	}
+
+/* .flip-container, .card-main-front, .card-main-back {
+	width: 320px;
+	height: 480px;
+} */
+
+/* flip speed goes here */
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.card-main-front, .card-main-back {
+	backface-visibility: hidden;
+
+	/* position: absolute; */
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.card-main-front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.card-main-back {
+	transform: rotateY(180deg);
 }
