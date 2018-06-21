@@ -1,0 +1,24 @@
+{
+  "name": "project0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scripts/index.js",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node scripts/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bezp/bez-project0.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bezp/bez-project0/issues"
+  },
+  "homepage": "https://github.com/bezp/bez-project0#readme"
+}
