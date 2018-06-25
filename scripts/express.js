@@ -8,6 +8,9 @@ var path = require('path');
 
 // app.use(express.static('style'));
 // app.use(express.static(path.join(__dirname, '../style')));
+app.use(express.static('images'));
+app.use(express.static('style'));
+app.use(express.static('scripts'));
 
 app.get('/', function (req, res) {
   //  res.send('Hello World');
