@@ -47,12 +47,12 @@
           {% if key == '_id' %}
             <form action="/delete/{{ val }}" method="POST">
             <input type="hidden" name="deleteItem" value="{{ val }}"></input>
-            <button type="submit">delete??????</button>
+            <button type="submit">Delete Forever</button>
             </form>
 
             <form action="/edit/{{ val }}" method="GET">
             <input type="hidden" name="editItem" value="{{ val }}"></input>
-            <button type="submit">edit me</button>
+            <button type="submit">Edit Me</button>
             </form>
           {% endif %}
 

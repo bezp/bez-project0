@@ -15,8 +15,8 @@
 
     <label for="cardDefinition">cardDefinition</label>
     <input type="text" id="cardDefinition" name="cardDefinition" value="{{xarrayedit.cardDefinition}}"> </input>   
-    
-    <button type="reset">Default</button>
+
+    <button type="reset">Reset</button>
     <button type="submit">Submit</button>
   </form>
       {# <form action="" method="">

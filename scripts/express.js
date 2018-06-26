@@ -104,13 +104,14 @@ app.route('/delete/:id')
 
 app.route('/edit/:id')
   .get((req, res) => {
+    console.log('editItem-----');
     console.log(req.query.editItem);
     var query = { _id: ObjectId(req.query.editItem.toString()) };
     db.collection('xflashcard').findOne(query, (error, result) => {
       if (error) {
         return console.log(error);
       }
-      console.log('edit-results-: ' + result);
+      console.log('edit-results-edit: ' + result);
       console.log(result);
       res.render('edit', {
         // xarray: results,
@@ -125,37 +126,30 @@ app.route('/edit/:id')
     console.log(req.body);
     console.log('~~');
     console.log(req.body._id);
+    console.log('~~!~~!~~');
 
-    var findId = { _id: ObjectId(req.body._id.toString()) };
-    var oldValue = db.collection("xflashcard").findOne(findId, function(err, result) {
-      if (err) throw err;
-      console.log('@@');
-      console.log(result);
-      // return result;
+    var selectedValues = { 
+      setName: req.body.setName.toString(),
+      cardTerm: req.body.cardTerm.toString(),
+      cardDefinition: req.body.cardDefinition.toString()
+    };
+    var newStoof = { $set: selectedValues };
+    db.collection("xflashcard").findOne( {_id: ObjectId(req.body._id.toString())} ).then((data) => { 
+      console.log('looking for 1');
+      console.log(data);
       // db.close();
-    }).then(() => {
-      var query = req.body;
-      // var query = { _id: ObjectId(req.body._id.toString()) };
-      console.log(query);
-      console.log('~~query');
-      var newValue = { $set: query };
-      db.collection("xflashcard").updateOne(oldValue, newValue, function(err, obj) {
+      return data;
+    }).then((data) => {
+      console.log('xxx');
+      console.log(data);
+      console.log('xxxend-data');
+      db.collection("xflashcard").updateOne(data, newStoof, function(err, obj) {
         if (err) throw err;
         console.log("x1 document edited");
+        // console.log(res); //super long thingie... 
         dbInfo(res);
       });
     });
-
-    // var query = req.body;
-    // // var query = { _id: ObjectId(req.body._id.toString()) };
-    // console.log(query);
-    // console.log('~~query');
-    // var newValue = { $set: query };
-    // db.collection("xflashcard").updateOne(oldValue, newValue, function(err, obj) {
-    //   if (err) throw err;
-    //   console.log("x1 document edited");
-    //   dbInfo(res);
-    // });
   });
 
 
