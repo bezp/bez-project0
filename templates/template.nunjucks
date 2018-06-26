@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   
-  {# <link rel="stylesheet" href="../index.css"> #}
+  <link rel="stylesheet" href="./flashcard.css" type="text/css">
 
   <title>Flashcard App</title>
 </head>
@@ -41,13 +41,14 @@
 
 
   {% block footer %}
-    <section class="" style="position: fixed; bottom: 0px;">
-      copy rights of ja boi bez --NEED TO GET RID ON INLINE STYLIN
+    <section class="xfooter" style="">
+      <img src="./bp_logo8_x.png" alt="Smiley face">
+      copyright &copy; 2018 bezalel, all rights reserved
     </section>
   {% endblock %}
 
 
 
-
+<script src="./new.js"></script>
 </body>
 </html>

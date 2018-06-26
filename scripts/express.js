@@ -82,31 +82,20 @@ mongodb.connect('mongodb://localhost:27017', (error, client) => {
 
   app.route('/edit/:id')
     .get((req, res) => {
-      // console.log(req.query.editItem);
-      // console.log('editItem-----');
-      // console.log(req.body.editItem.toString());
+      console.log(req.query);
+      console.log('editItem');
       var query = { _id: ObjectId(req.query.editItem.toString()) };
       db.collection('xflashcard').findOne(query, (error, result) => {
         if (error) {
           return console.log(error);
         }
-        // console.log('edit-results-edit: ' + result);
-        // console.log(result);
         res.render('edit', {
-          // xarray: results,
           setname: req.body.setName,
           xarrayedit: result,
         });
       });
     })
     .post((req, res) => {
-      // console.log(req.body.editItem);
-      // console.log('~');
-      // console.log(req.body);
-      // console.log('~~');
-      // console.log(req.body._id);
-      // console.log('~~!~~!~~');
-
       var selectedValues = { 
         setName: req.body.setName.toString(),
         cardTerm: req.body.cardTerm.toString(),
@@ -114,21 +103,11 @@ mongodb.connect('mongodb://localhost:27017', (error, client) => {
       };
       var newStoof = { $set: selectedValues };
       db.collection("xflashcard").findOne( {_id: ObjectId(req.body._id.toString())} ).then((data) => { 
-        // console.log('looking for 1');
-        // console.log(data);
-        // db.close();
         return data;
       }).then((data) => {
-        // console.log('xxx');
-        // console.log(data);
-        // console.log('xxxend-data');
         db.collection("xflashcard").updateOne(data, newStoof, function(err, obj) {
           if (err) throw err;
-          // console.log("x1 document edited");
-          // dbInfo(res);
           var setRedirect = req.headers.referer.slice(22); // ignore the first part 'http://localhost:8000/bio'
-          // console.log('#####');
-          // console.log(setRedirect);
           res.redirect('/' + data.setName);
         });
       });
@@ -152,7 +131,6 @@ mongodb.connect('mongodb://localhost:27017', (error, client) => {
           cardList: result,
         });
       })
-
     }) // end get for set routes
 
   app.route('/delete/:id')

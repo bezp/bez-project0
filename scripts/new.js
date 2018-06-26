@@ -1,30 +1,36 @@
 
+// postBoxes.forEach(function(postBox) {
 
-var submitButton = document.querySelector('#addButton');
+//   postBox.addEventListener('click', function() {
+//     var postId = this.getAttribute('post-id')
+//   console.log(postId)
+//     document.getElementById('comment-form-' + postId).style.display = 'block'
+//   })
+// })
 
-var sectionOne = document.querySelector('#sectionOne');
-var sectionTwo = document.querySelector('#sectionTwo');
 
-var userCardTerm = document.querySelector('#cardTerm');
-var userCardDefinition = document.querySelector('#cardDefinition');
+// var testClick = document.querySelectorAll('.cardTermCss');
+// console.log(testClick);
 
-// var objDeck = {};
-// var counter = 1;
+// // testClick.forEach(function(card) {
+// //   // deleteUser(userItem);
+// //   card.addEventListener('click'), function() {
+// //     card.style.color = 'orange';
+// //   }
+// // });
+// // var elements = document.querySelectorAll(".a, .b");
+// for (var i = 0; i < testClick.length; i++) {
+//   testClick[i].addEventListener("click", function() {
+//     console.log("clicked");
+//     console.log(testClick[0]);
+//   });
+// }
+// $(document).ready(function() {
+//   $(".cardTermCss").addClass("animated");
+// });
 
-submitButton.addEventListener('click', () => {
-  var cTerm = userCardTerm.value;
-  var cDefinition = userCardDefinition.value;
 
-  
-  console.log(cTerm, cDefinition);
 
-  // objDeck.counter += {cTerm:cDefinition};
-
-  userCardTerm.value = '';
-  userCardDefinition.value= '';
-  // console.log('obj' + objDeck);
-  // counter++;
-})
 
 
 

@@ -1,15 +1,36 @@
+
+
 body {
-  border: 1px red solid;
+  background-color: lightgray;
+}
+.cardTermCss {
+  color: blue;
+  border: 1px solid red; 
+  display: inline-block;
+  padding: 20px;
+  width: 45%;
+  
+}
+.cardTermCss:hover + .cardDefinitionCss {
+  visibility: visible;
+}
+
+.cardDefinitionCss{
+  color: blue;
+  visibility:hidden;
+  border: 1px solid green; 
+  display: inline-block;
+  padding: 20px;
+  width: 45%;
 }
 
 
 
 
-
-
-
-
-
+.xfooter {
+  position: fixed; 
+  bottom: 0px;
+}
 
 
 

@@ -29,3 +29,9 @@
 
 {% block main %}
 {% endblock %}
+
+  {% block footer %}
+    <section class="xfooter" style="position: fixed; bottom: 0px;">
+      copyright &copy; 2018 bezalel, all rights reserved
+    </section>
+  {% endblock %}

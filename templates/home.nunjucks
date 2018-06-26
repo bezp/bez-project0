@@ -6,6 +6,8 @@
 
   {% block main %}
 
+    <h2>Choose a created set or make your own</h2>
+
     {% for set in setTitlesUnique %}
 
       <section class="">
