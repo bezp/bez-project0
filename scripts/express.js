@@ -30,148 +30,177 @@ mongodb.connect('mongodb://localhost:27017', (error, client) => {
   if (error) {
     console.error(error);
     client.close();
-  }
-  db = client.db('xflashcard');
-  app.listen(8000, () => {
+  } else {
+    db = client.db('xflashcard');
+    app.listen(8000, () => {
     console.log('listening on 8k');
-  });
-});
-
-// find stuff in db
-function dbInfo (res) {
-  db.collection('xflashcard').find({}).toArray((error, results) => {
-    if (error) {
-      return console.log(error);
-    }
-    // console.log('results: ' + results[0]._id);
-    res.render('display', {
-      xarray: results,
     });
-  });
-}
+  }
 
 
-//routes
-app.route('/')
-  .get((req, res) => {
-    db.collection('xflashcard').find({}).toArray((error, results) => {
-      if (error) {
-        return console.log(error);
-      }
-      console.log('results-: ' + results);
-      res.render('display', {
-        xarray: results,
-        setname: req.body.setName,
+  function checkDB() {
+    db.collection('xflashcard').find({}).toArray((err, result) => {
+      if (err) throw err;
+      // console.log(result); //gives list of objects in db
+      console.log('# of db items: ' + result.length);
+    });
+  }
+
+  app.route('/') //Main page route
+    .get((req, res) => {
+      db.collection('xflashcard').find({}).toArray((err, result) => {
+        if (err) throw err;
+        // console.log(result); //list of objects with _id, setName, cardTerm, cardDefinition
+
+        // make list of sets
+        var setTitles = [];
+        if (result) {
+          for (var obj in result) {
+            setTitles.push(result[obj].setName);
+          }
+        }
+        var setTitlesUnique = [...new Set(setTitles)]; //creates list without the set obj ; spread operator ... transform the set back into an Array
+        // console.log(setTitlesUnique);  
+        res.render('home', {
+          xarraylist: result,
+          setTitlesUnique: setTitlesUnique,
+        });
       });
-    });
-  })
+    }) //end get for ('/')
   .post((req, res) => {
     console.log(req.body);
-    db.collection('xflashcard').insertOne(req.body, (err, results) => {
-      if (err) {
-        return console.log(err);
-      }
+    console.log(' (/) post req.body');
+    db.collection('xflashcard').insertOne(req.body, (err, result) => {
+      if (err) throw err;
+      // console.log(result); //long thing
+      var setRedirect = req.headers.referer.slice(22); // ignore the first part 'http://localhost:8000/bio'
+      res.redirect('/' + setRedirect);
+    });
+  }); //end post for ('/')
 
-      db.collection('xflashcard').find({}).toArray((error, results) => {
+
+
+  app.route('/edit/:id')
+    .get((req, res) => {
+      // console.log(req.query.editItem);
+      // console.log('editItem-----');
+      // console.log(req.body.editItem.toString());
+      var query = { _id: ObjectId(req.query.editItem.toString()) };
+      db.collection('xflashcard').findOne(query, (error, result) => {
         if (error) {
           return console.log(error);
         }
-        res.render('display', {
-          xarray: results,
+        // console.log('edit-results-edit: ' + result);
+        // console.log(result);
+        res.render('edit', {
+          // xarray: results,
           setname: req.body.setName,
+          xarrayedit: result,
+        });
+      });
+    })
+    .post((req, res) => {
+      // console.log(req.body.editItem);
+      // console.log('~');
+      // console.log(req.body);
+      // console.log('~~');
+      // console.log(req.body._id);
+      // console.log('~~!~~!~~');
+
+      var selectedValues = { 
+        setName: req.body.setName.toString(),
+        cardTerm: req.body.cardTerm.toString(),
+        cardDefinition: req.body.cardDefinition.toString()
+      };
+      var newStoof = { $set: selectedValues };
+      db.collection("xflashcard").findOne( {_id: ObjectId(req.body._id.toString())} ).then((data) => { 
+        // console.log('looking for 1');
+        // console.log(data);
+        // db.close();
+        return data;
+      }).then((data) => {
+        // console.log('xxx');
+        // console.log(data);
+        // console.log('xxxend-data');
+        db.collection("xflashcard").updateOne(data, newStoof, function(err, obj) {
+          if (err) throw err;
+          // console.log("x1 document edited");
+          // dbInfo(res);
+          var setRedirect = req.headers.referer.slice(22); // ignore the first part 'http://localhost:8000/bio'
+          // console.log('#####');
+          // console.log(setRedirect);
+          res.redirect('/' + data.setName);
         });
       });
     });
-  });
 
 
-app.route('/delete/:id')
-  .post((req, res) => {
-    console.log(req.body.deleteItem);
-    // console.log('~');
-    // console.log(req.body.pname);
-    // console.log('~~');
-    // console.log(req.body._id);
-
-    var query = { _id: ObjectId(req.body.deleteItem.toString()) };
-    db.collection("xflashcard").deleteOne(query, function(err, obj) {
-      if (err) throw err;
-      console.log("1 document deleted");
-      dbInfo(res);
-    });
-  });
 
 
-app.route('/edit/:id')
-  .get((req, res) => {
-    console.log('editItem-----');
-    console.log(req.query.editItem);
-    var query = { _id: ObjectId(req.query.editItem.toString()) };
-    db.collection('xflashcard').findOne(query, (error, result) => {
-      if (error) {
-        return console.log(error);
-      }
-      console.log('edit-results-edit: ' + result);
-      console.log(result);
-      res.render('edit', {
-        // xarray: results,
-        // setname: req.body.setName,
-        xarrayedit: result,
-      });
-    });
-  })
-  .post((req, res) => {
-    console.log(req.body.editItem);
-    console.log('~');
-    console.log(req.body);
-    console.log('~~');
-    console.log(req.body._id);
-    console.log('~~!~~!~~');
+  app.route(/[a-z0-9]/)
+    .get((req, res) => {
+      console.log('set url thing is --' + req.url);
 
-    var selectedValues = { 
-      setName: req.body.setName.toString(),
-      cardTerm: req.body.cardTerm.toString(),
-      cardDefinition: req.body.cardDefinition.toString()
-    };
-    var newStoof = { $set: selectedValues };
-    db.collection("xflashcard").findOne( {_id: ObjectId(req.body._id.toString())} ).then((data) => { 
-      console.log('looking for 1');
-      console.log(data);
-      // db.close();
-      return data;
-    }).then((data) => {
-      console.log('xxx');
-      console.log(data);
-      console.log('xxxend-data');
-      db.collection("xflashcard").updateOne(data, newStoof, function(err, obj) {
+      var setQuery = req.url.slice(1); // string of set name
+      // console.log(setQuery);
+      var formattedQuery = { setName: setQuery }; //formatted
+      db.collection('xflashcard').find(formattedQuery).toArray((err, result) => {
         if (err) throw err;
-        console.log("x1 document edited");
-        // console.log(res); //super long thingie... 
-        dbInfo(res);
+
+        console.log(result); //list of obj w/ setname = formattedQuery
+        res.render('set', {
+          cardList: result,
+        });
+      })
+
+    }) // end get for set routes
+
+  app.route('/delete/:id')
+    .post((req, res) => {
+      console.log('on dlt page');
+      // var query = { _id: ObjectId(req.body.deleteItem.toString()) };
+      var query = { _id: ObjectId(req.body.deleteItem.toString()) };
+      // console.log('@@@@@');
+      // console.log(req.headers.referer);
+      db.collection("xflashcard").deleteOne(query, function(err, obj) {
+        if (err) throw err;
+        console.log("1 document deleted");
+        // dbInfo(res);
+        var setRedirect = req.headers.referer.slice(22); // ignore the first part 'http://localhost:8000/bio'
+        // console.log('~~~~~~~ is ' + setQuery);
+        res.redirect('/' + setRedirect);
       });
-    });
-  });
+    }) //end post for delete routes
 
 
 
-// app.route('/')
-//   .get((req, res) => {
-//     // console.log(jsObjList);
-//     res.render('display', {
-//       setChoice: getSetNameList(jsObjList),
 
-//     });
-//   })
-//   .post((req, res) => {
-//     // console.log(req.body);
-//     res.render('display', {
-//       setChoice: getSetNameList(jsObjList),
-//       setName: req.body.setName || req.body.setChoice, 
-//       cardTerm: req.body.cardTerm,
-//       cardDefinition: req.body.cardDefinition,
-//     });
-//     // res.end();
-//   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+  console.log('~~~~~~~~~~');
+  checkDB();
+
+
+}); //end mongo connect
+
+
+//43-155
+
+
+
+
+
 
 
 

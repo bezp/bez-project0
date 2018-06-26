@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  {# <link rel="stylesheet" href="../index.css"> #}
+
+  <title>Flashcard App</title>
+</head>
+<body>
+  
+  {% block header %}
+    <a href="/">Main Page</a>
+
+    <form method="POST" action="/">
+      <label for="setName">setName</label>
+      <input type="text" id="setName" name="setName" value="{{setname}}" required> </input>
+
+      <label for="cardTerm">cardTerm</label>
+      <input type="text" id="cardTerm" name="cardTerm"> </input>
+
+      <label for="cardDefinition">cardDefinition</label>
+      <input type="text" id="cardDefinition" name="cardDefinition"> </input>
+
+      <button type="reset">Clear</button>
+      <button type="submit">Submit</button>
+    </form>
+  {% endblock %}
+
+
+
+
+  {% block main %}
+    m@in template.nunjucks
+  {% endblock %}
+
+
+
+
+
+  {% block footer %}
+    <section class="" style="position: fixed; bottom: 0px;">
+      copy rights of ja boi bez --NEED TO GET RID ON INLINE STYLIN
+    </section>
+  {% endblock %}
+
+
+
+
+</body>
+</html>

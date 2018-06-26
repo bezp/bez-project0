@@ -1,0 +1,23 @@
+
+{% extends 'template.nunjucks' %}
+
+
+
+
+  {% block main %}
+
+    {% for set in setTitlesUnique %}
+
+      <section class="">
+        
+        <a href="{{set}}">{{set}}</a>
+
+      <section>
+
+    {% endfor %}
+
+
+  {% endblock %}
+
+
+

@@ -1,7 +1,8 @@
 
+{% extends 'template.nunjucks' %}
 
-{% block main %}
-
+{% block header %}
+  <a href="/">Main Page</a>
     
   <form method="POST" action="/edit/{{ xarrayedit._id }}">
 
@@ -19,47 +20,12 @@
     <button type="reset">Reset</button>
     <button type="submit">Submit</button>
   </form>
-      {# <form action="" method="">
-      {% for key, val in xarrayedit %}
-        <li>key: {{key}} --- value: {{val}}        </li>
-        
-     
-
-      {% endfor %}
-
-      </form> #}
-
-
-  {# {% if xarrayedit.length > 0 %}
-    <p> \/ xarray \/ </p>
-    {% for itemInList in xarrayedit %}
-
-      {% for key, val in itemInList %}
-        <li>key: {{key}} --- value: {{val}}
-          
-          {% if key == '_id' %}
-            <form action="/delete/{{ val }}" method="POST">
-            <input type="hidden" name="deleteItem" value="{{ val }}"></input>
-            <button type="submit">delete??????</button>
-            </form>
-
-            <form action="/edit/{{ val }}" method="GET">
-            <input type="hidden" name="editItem" value="{{ val }}"></input>
-            <button type="submit">edit me</button>
-            </form>
-          {% endif %}
-
-        </li>
-      {% endfor %}
-
-      <p>~~~</p>
-    {% endfor %}
-  {% endif %} #}
 
 
 
+{% endblock %}
 
 
 
-
+{% block main %}
 {% endblock %}

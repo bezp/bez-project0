@@ -1,0 +1,14 @@
+
+{{xarraylist}}
+{% for item in xarraylist %}
+
+  {{ item._id }} </br>
+
+{% endfor %}
+
+
+{{setTitlesUnique}}
+{% for set in setTitlesUnique %}
+{{ set }}
+
+{% endfor %}

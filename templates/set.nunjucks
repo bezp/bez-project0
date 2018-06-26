@@ -1,0 +1,44 @@
+{% extends 'template.nunjucks' %}
+
+
+
+
+  {% block main %}
+
+    {% for card in cardList %}
+
+      {% for key, value in card %}
+      
+
+        {% if (key == 'cardTerm') %}
+          <div class="" style="border: 1px solid red; display: inline-block;">
+            <p> cardTerm is {{value}} </p>
+          </div>
+        {% elif (key == 'cardDefinition') %}
+          <div class="" style="border: 1px solid green; display: inline-block;">
+            <p> cardDefinition is {{value}} </p>
+          </div>
+        {% else %}
+        {% endif %}
+
+        {% if key == '_id' %}
+          <form action="/delete/{{ value }}" method="POST">
+          <input type="hidden" name="deleteItem" value="{{ value }}"></input>
+          <button type="submit">Delete</button>
+          </form>
+
+
+          <form action="/edit/{{ value }}" method="GET">
+          <input type="hidden" name="editItem" value="{{ value }}"></input>
+          <button type="submit">Edit Me</button>
+          </form>
+        {% endif %}
+
+
+
+      {% endfor %}
+
+    {% endfor %}
+
+  {% endblock %}
+
