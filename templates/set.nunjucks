@@ -12,11 +12,11 @@
 
         {% if (key == 'cardTerm') %}
           <div class="cardTermCss" style="">
-            <p> cardTerm is {{value}} </p>
+            <p> {{value}} </p>
           </div>
         {% elif (key == 'cardDefinition') %}
           <div class="cardDefinitionCss" style="">
-            <p> cardDefinition is {{value}} </p>
+            <p> {{value}} </p>
           </div>
         {% else %}
         {% endif %}
@@ -39,6 +39,6 @@
       {% endfor %}
 
     {% endfor %}
-
+  <br></br><br></br><br></br><br></br><br></br>
   {% endblock %}
 

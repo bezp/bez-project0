@@ -68,8 +68,8 @@ mongodb.connect('mongodb://localhost:27017', (error, client) => {
       });
     }) //end get for ('/')
   .post((req, res) => {
-    console.log(req.body);
-    console.log(' (/) post req.body');
+    // console.log(req.body);
+    // console.log(' (/) post req.body');
     db.collection('xflashcard').insertOne(req.body, (err, result) => {
       if (err) throw err;
       // console.log(result); //long thing
@@ -82,9 +82,9 @@ mongodb.connect('mongodb://localhost:27017', (error, client) => {
 
   app.route('/edit/:id')
     .get((req, res) => {
-      console.log(req.query);
-      console.log('editItem');
-      var query = { _id: ObjectId(req.query.editItem.toString()) };
+      // console.log(req.query);
+      // console.log('editItem');
+      var query = { _id: ObjectId(req.query.editItem) };
       db.collection('xflashcard').findOne(query, (error, result) => {
         if (error) {
           return console.log(error);
@@ -118,7 +118,7 @@ mongodb.connect('mongodb://localhost:27017', (error, client) => {
 
   app.route(/[a-z0-9]/)
     .get((req, res) => {
-      console.log('set url thing is --' + req.url);
+      // console.log('set url thing is --' + req.url);
 
       var setQuery = req.url.slice(1); // string of set name
       // console.log(setQuery);
@@ -126,7 +126,7 @@ mongodb.connect('mongodb://localhost:27017', (error, client) => {
       db.collection('xflashcard').find(formattedQuery).toArray((err, result) => {
         if (err) throw err;
 
-        console.log(result); //list of obj w/ setname = formattedQuery
+        // console.log(result); //list of obj w/ setname = formattedQuery
         res.render('set', {
           cardList: result,
         });
@@ -135,14 +135,14 @@ mongodb.connect('mongodb://localhost:27017', (error, client) => {
 
   app.route('/delete/:id')
     .post((req, res) => {
-      console.log('on dlt page');
+      // console.log('on dlt page');
       // var query = { _id: ObjectId(req.body.deleteItem.toString()) };
       var query = { _id: ObjectId(req.body.deleteItem.toString()) };
       // console.log('@@@@@');
       // console.log(req.headers.referer);
       db.collection("xflashcard").deleteOne(query, function(err, obj) {
         if (err) throw err;
-        console.log("1 document deleted");
+        // console.log("1 document deleted");
         // dbInfo(res);
         var setRedirect = req.headers.referer.slice(22); // ignore the first part 'http://localhost:8000/bio'
         // console.log('~~~~~~~ is ' + setQuery);
