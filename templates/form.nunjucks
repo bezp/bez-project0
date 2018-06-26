@@ -1,0 +1,16 @@
+
+
+
+{% block main %}
+
+  <form method="POST">
+    <label for="pname">ja ppppnam</label>
+    <input type="text" id="pname" name="pname"> </input>
+
+    <label for="sname">ja sssssssnam</label>
+    <input type="text" id="sname" name="sname"> </input>
+    <button type="submit">entr</button>
+  </form>
+
+{% endblock %}
+

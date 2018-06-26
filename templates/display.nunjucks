@@ -1,0 +1,69 @@
+
+
+
+
+{% block main %}
+  {# <select>
+    <option label="Volvo">vol</option>
+    <option label="Saab">saa</option>
+    <option label="Mercedes">merc</option>
+    <option label="Audi">audi</option>
+  </select> #}
+
+
+  <form method="POST">
+    <select name="setChoice">
+        <option value="noChoice">Choose</option>
+      {% for subject in setChoice %}
+        <option value={{ subject }}>{{ subject }}</option>
+      {% endfor %}
+    </select>
+
+    {# <select name="setChoice">
+      <option value="noChoice">Choose</option>
+      <option value="saab">Saab</option>
+      <option value="fiat">Fiat</option>
+      <option value="audi">Audi</option>
+    </select> #}
+
+    <label for="setName">setName</label>
+    <input type="text" id="setName" name="setName"> </input>
+
+    <label for="cardTerm">cardTerm</label>
+    <input type="text" id="cardTerm" name="cardTerm"> </input>
+
+    <label for="cardDefinition">cardDefinition</label>
+    <input type="text" id="cardDefinition" name="cardDefinition"> </input>
+
+    <button type="reset">Clear</button>
+    <button type="submit">Submit</button>
+  </form>
+  
+  <p>~~~~~~~~`form above ~~~~~~~~</p>
+
+
+  <h2>setname
+    {{ setName }}
+  </h2>
+  <h2>setchoice
+    {{ setChoice }}
+  </h2>
+
+
+
+  {# <p>setName</p>
+  {{ setName }}
+
+  <p>cardTerm</p>
+  {{ cardTerm }}
+
+  <p>cardDefinition</p>
+  {{ cardDefinition }} #}
+
+{% endblock %}
+
+
+
+
+
+
