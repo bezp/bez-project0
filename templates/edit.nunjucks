@@ -1,46 +1,39 @@
 
 
-
-
 {% block main %}
 
-  <form method="POST" action="/">
-    {# <select name="setChoice">
-        <option value="noChoice">Choose</option>
-      {% for subject in setChoice %}
-        <option value={{ subject }}>{{ subject }}</option>
-      {% endfor %}
-    </select> #}
+    
+  <form method="POST" action="/edit/{{ xarrayedit._id }}">
+
+    <input type="hidden" id="{{xarrayedit._id}}" name="_id" value="{{xarrayedit._id}}" required> </input>
+
     <label for="setName">setName</label>
-    <input type="text" id="setName" name="setName" value="{{setname}}" required> </input>
+    <input type="text" id="setName" name="setName" value="{{xarrayedit.setName}}" required> </input>
 
     <label for="cardTerm">cardTerm</label>
-    <input type="text" id="cardTerm" name="cardTerm"> </input>
+    <input type="text" id="cardTerm" name="cardTerm" value="{{xarrayedit.cardTerm}}"> </input>
 
     <label for="cardDefinition">cardDefinition</label>
-    <input type="text" id="cardDefinition" name="cardDefinition"> </input>
-
-    <button type="reset">Clear</button>
+    <input type="text" id="cardDefinition" name="cardDefinition" value="{{xarrayedit.cardDefinition}}"> </input>   
+    
+    <button type="reset">Default</button>
     <button type="submit">Submit</button>
   </form>
-  
-  <p>~~~~~~~~`form above ~~~~~~~~</p>
+      {# <form action="" method="">
+      {% for key, val in xarrayedit %}
+        <li>key: {{key}} --- value: {{val}}        </li>
+        
+     
+
+      {% endfor %}
+
+      </form> #}
 
 
-  <h2>setname
-    {{ setname }}
-  </h2>
-  {# <h2>setchoice
-    {{ setChoice }}
-  </h2> #}
-
-
-
-
-
-  {% if xarray.length > 0 %}
+  {# {% if xarrayedit.length > 0 %}
     <p> \/ xarray \/ </p>
-    {% for itemInList in xarray %}
+    {% for itemInList in xarrayedit %}
+
       {% for key, val in itemInList %}
         <li>key: {{key}} --- value: {{val}}
           
@@ -61,13 +54,12 @@
 
       <p>~~~</p>
     {% endfor %}
+  {% endif %} #}
 
-  {% endif %}
+
+
+
+
+
 
 {% endblock %}
-
-
-
-
-
-
